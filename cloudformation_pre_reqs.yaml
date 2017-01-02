@@ -1,0 +1,7 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Carbcounter pre-reqs."
+Resources:
+  S3Bucket:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: "billyjf.carbcounter"   # For aws cloudformation package|deploy commands
