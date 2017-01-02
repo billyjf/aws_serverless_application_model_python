@@ -12,7 +12,7 @@ Follow these steps to complete the configuration of your command API endpoint
   3. Update the URL for your Slack slash command with the invocation URL for the
      created API resource in the prod stage.
 '''
-
+from nutritionix import Nutritionix
 #import boto3
 import json
 import logging
@@ -44,7 +44,39 @@ def lambda_handler(event, context):
     #user = params['user_name'][0]
     #command = params['command'][0]
     #...
-    search = event['pathParameters']['search']
+    search = ""
 
-    return respond(None, "SEARCH: {0}".format(search))
+    if event != None and 'pathParameters' in event:
+        search = event['pathParameters']['search']
+
+    if len(search) > 0:
+        nix = Nutritionix(app_id="***REMOVED***",
+                          api_key="***REMOVED***")
+
+        #nix_results = nix.search(search).json()
+        nix_results = nix.search().nxql(
+            fields=["item_id",
+                    "item_name",
+                    "brand_name",
+                    "nf_total_carbohydrate"],
+            query=search).json()
+    else:
+        nix_results = {'hits': []}
+
+    results = {'hits': []}
+
+    count = 0
+    for hit in nix_results['hits']:
+        if hit['fields']['nf_total_carbohydrate'] is not None:
+            results['hits'].append({'id': count,
+                                    'value': '%s, %s, %sg' % ( hit['fields']
+                                                                  ['item_name'],
+                                                               hit['fields']
+                                                                  ['brand_name'],
+                                                               hit['fields']
+                                                                  ['nf_total_carbohydrate'] )})
+        count += 1
+        pass
+
+    return respond(None, results)
 
