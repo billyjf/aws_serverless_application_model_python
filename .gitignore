@@ -1,4 +1,5 @@
 *.zip
+*.pyc
 .DS_Store
 lambda/carbcounter/nutritionix*
 lambda/carbcounter/requests**
