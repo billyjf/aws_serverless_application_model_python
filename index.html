@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <title>Carb Counter</title>
+        <link rel="stylesheet" href="codebase/webix.css" type="text/css"> 
+        <script src="codebase/webix_debug.js" type="text/javascript"></script>
+        <style>
+        	.carbs {
+        		font-size: 36pt;
+        	}
+        </style>
+
+        <link rel="shortcut icon" href="favicon.ico"></link>
+        <link rel="apple-touch-icon" href="favicon.png"></link>
+        <meta name="mobile-web-app-capable" content="yes">
+    </head>
+    <body>
+        <script type="text/javascript" charset="utf-8">
+        function get_grams(item_value) {
+            grams = -1;
+
+            pieces = item_value.split(", ");
+            if(pieces.length > 0){
+                gram_pieces = pieces[pieces.length - 1].split("g");
+                if(gram_pieces.length > 0) {
+                    grams = gram_pieces[0];
+                }
+            }
+
+            return grams;
+        }
+
+        function recalc_carbs() {
+            total_grams = 0.0;
+
+            if($$("list_food").count() > 0) {
+                id = $$("list_food").getFirstId();
+                do {
+                    item_value = $$("list_food").getItem(id).value;
+                    total_grams += parseFloat(get_grams(item_value));
+                } while( ( id = $$("list_food").getNextId(id) ) );
+            }
+
+            $$("carbs").setValue(total_grams.toFixed(2) + " grams");
+        }
+
+        webix.ready(function() {
+            webix.ui.fullScreen();
+            webix.ui({
+                rows:[
+                    {
+                        view: "template",
+                        type: "header",
+                        template: "Carb Counter Total"
+                    },
+                    {
+                        id: "carbs",
+                        view: "label",
+                        label: "0g"
+                    },
+                    {
+                        view: "template",
+                        type: "header",
+                        template: "Search"
+                    },
+                    {
+                        id: "text_search",
+                        view: "text",
+                        //label: "Search",
+                        value: ""
+                    },
+                    {
+                        view: "template",
+                        type: "header",
+                        template: "Food"
+                    },
+                    {
+                        view: "list",
+                        id: "list_food",
+                        on:{'onItemClick': function(id, e, node){
+                                $$("list_food").remove(id);
+                                recalc_carbs();
+                            }
+                           }
+                    },
+                    /*{
+                        view: "button",
+                        value: "Add to Total",
+                        click: function() {
+
+                        }
+                    },*/
+                    {
+                        view: "label",
+                        label: "Version 0.3"
+                    },
+                    {
+                        view: "template",
+                        template: "", /* Ad Space */
+                        maxHeight: 72
+                    }
+                   ]
+            })
+
+            webix.ui({
+                        id: "text_search_suggest",
+                        view: "suggest",
+                        keyPressTimeout: "1000",
+                        input: $$("text_search"),
+                        body: {
+                            dataFeed: "data/search/pizza",
+                        },
+                        on:{'onValueSuggest': function(){
+                            if($$("text_search").getValue().length > 0) {
+                                if(get_grams($$("text_search").getValue()) > -1) {
+                                    $$("list_food").add( {
+                                            value: $$("text_search").getValue()
+                                        }
+                                    );
+                                    $$("text_search").setValue("");
+
+                                    recalc_carbs();
+                                }
+                            }
+                          },
+                          'onShow': function(){
+                            htmlInputTextObj = $$("text_search")._contentobj.children[0].children[0];
+                            htmlInputTextObj.blur();
+                          }
+                        }
+                    })
+
+            //htmlInputTextObj = $$("text_search")._contentobj.children[0].children[1];
+            htmlInputTextObj = $$("text_search")._contentobj.children[0].children[0];
+            webix.event(htmlInputTextObj, "keyup", function(){
+                if(htmlInputTextObj.value.length > 0)
+                    $$("text_search_suggest").getBody().config.dataFeed = "data/search/" + htmlInputTextObj.value;
+                else
+                    $$("text_search_suggest").getBody().config.dataFeed = "";
+            });
+
+            recalc_carbs();
+		})
+        </script>
+    </body>
+</html>

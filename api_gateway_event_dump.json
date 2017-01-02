@@ -1,0 +1,54 @@
+{
+  "body": null,
+  "resource": "/carbcounter/{search+}",
+  "requestContext": {
+    "resourceId": "ynljxk",
+    "apiId": "fnifkhfna6",
+    "resourcePath": "/carbcounter/{search+}",
+    "httpMethod": "GET",
+    "requestId": "85f3e8e8-d11d-11e6-9089-95cb74a8e325",
+    "accountId": "649309545751",
+    "identity": {
+      "apiKey": null,
+      "userArn": null,
+      "cognitoAuthenticationType": null,
+      "accessKey": null,
+      "caller": null,
+      "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36",
+      "user": null,
+      "cognitoIdentityPoolId": null,
+      "cognitoIdentityId": null,
+      "cognitoAuthenticationProvider": null,
+      "sourceIp": "73.25.135.183",
+      "accountId": null
+    },
+    "stage": "prod"
+  },
+  "queryStringParameters": null,
+  "httpMethod": "GET",
+  "pathParameters": {
+    "search": "search/test"
+  },
+  "headers": {
+    "Via": "1.1 7f3f42df8af148df1f9f1ee7175987ad.cloudfront.net (CloudFront)",
+    "Accept-Language": "en-US,en;q=0.8",
+    "Accept-Encoding": "gzip, deflate, sdch, br",
+    "CloudFront-Is-SmartTV-Viewer": "false",
+    "CloudFront-Forwarded-Proto": "https",
+    "X-Forwarded-For": "73.25.135.183, 54.182.214.16",
+    "CloudFront-Viewer-Country": "US",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+    "Upgrade-Insecure-Requests": "1",
+    "Host": "fnifkhfna6.execute-api.us-west-2.amazonaws.com",
+    "X-Forwarded-Proto": "https",
+    "X-Amz-Cf-Id": "9Bw3t2TRF8KRBdpwaKXXwY8HgH33lmNmHEzrusiJOajZ2Qfij9VRhg==",
+    "CloudFront-Is-Tablet-Viewer": "false",
+    "X-Forwarded-Port": "443",
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.95 Safari/537.36",
+    "CloudFront-Is-Mobile-Viewer": "false",
+    "CloudFront-Is-Desktop-Viewer": "true"
+  },
+  "stageVariables": null,
+  "path": "/carbcounter/search/test",
+  "isBase64Encoded": false
+}
