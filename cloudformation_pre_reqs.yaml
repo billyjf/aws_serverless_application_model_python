@@ -5,3 +5,10 @@ Resources:
     Type: "AWS::S3::Bucket"
     Properties:
       BucketName: "billyjf.carbcounter"   # For aws cloudformation package|deploy commands
+  S3BucketPublic:
+    Type: "AWS::S3::Bucket"
+    Properties:
+      BucketName: "billyjf.carbcounter.public"
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html

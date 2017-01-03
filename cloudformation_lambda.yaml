@@ -2,6 +2,13 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: "Carbcounter lambda function for aws cloudformation package|deploy."
 Transform: "AWS::Serverless-2016-10-31"
 Resources:
+  APIGateway:
+    Type: "AWS::Serverless::Api"
+    Properties:
+      StageName: prod
+      DefinitionUri: swagger.yaml
+      Variables:
+        LambdaFunctionName: !Ref Lambda
   Lambda:
     # Additional type documentation available at
     # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md
@@ -11,11 +18,18 @@ Resources:
       Runtime: python2.7
       CodeUri: /Users/billyfisher/carbcounter.billyjf.com/lambda/carbcounter
       Events:
+        ProxyApiRoot:
+          Type: Api
+          Properties:
+            RestApiId: !Ref APIGateway
+            Path: /
+            Method: ANY
         GetResource:
           Type: Api
           Properties:
-            Path: /carbcounter/{search+}
-            Method: get
+            Path: /{search+}
+            Method: ANY
+            RestApiId: !Ref APIGateway
       Policies:
       - Statement:
         - Effect: Allow

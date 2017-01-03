@@ -108,7 +108,7 @@
                         keyPressTimeout: "1000",
                         input: $$("text_search"),
                         body: {
-                            dataFeed: "data/search/pizza",
+                            dataFeed: "https://k2aks8qbq5.execute-api.us-west-2.amazonaws.com/prod/pizza",
                         },
                         on:{'onValueSuggest': function(){
                             if($$("text_search").getValue().length > 0) {
@@ -134,7 +134,7 @@
             htmlInputTextObj = $$("text_search")._contentobj.children[0].children[0];
             webix.event(htmlInputTextObj, "keyup", function(){
                 if(htmlInputTextObj.value.length > 0)
-                    $$("text_search_suggest").getBody().config.dataFeed = "data/search/" + htmlInputTextObj.value;
+                    $$("text_search_suggest").getBody().config.dataFeed = "https://k2aks8qbq5.execute-api.us-west-2.amazonaws.com/prod/" + htmlInputTextObj.value;
                 else
                     $$("text_search_suggest").getBody().config.dataFeed = "";
             });
