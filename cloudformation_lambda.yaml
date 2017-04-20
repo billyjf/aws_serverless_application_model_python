@@ -16,7 +16,7 @@ Resources:
     Properties:
       Handler: carbcounter.lambda_handler
       Runtime: python2.7
-      CodeUri: /Users/billyfisher/carbcounter.billyjf.com/lambda/carbcounter
+      CodeUri: /Users/billyfisher/carbcounter.billyjf.com/lambda
       Events:
         ProxyApiRoot:
           Type: Api
