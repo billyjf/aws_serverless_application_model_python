@@ -32,7 +32,7 @@ function aws_creds_are_set() {
     then
         echo "Aws creds not set, setting them now."
 
-cat | tee $1 << EOF
+cat | tee -a $1 << EOF
 [default]
 region=us-west-2
 aws_access_key_id=$aws_access_key_id
