@@ -33,11 +33,9 @@ def download_dependencies(ctx,
                           lambda_name):
   if not os.path.isfile("lambda/{0}/nutritionix.py".format(lambda_name)):
     ctx.run("pip install -U pip") # Ensure that --target is available
-    ctx.run("pip install --target {0} nutritionix".format(lambda_name))
+    ctx.run("pip install --target lambda/{0} nutritionix".format(lambda_name))
 
   ctx.run("ls -R lambda/{0}".format(lambda_name))
-
-  ctx.run("ls -R .")
 
 @task
 def clean_python_lambda(ctx):
