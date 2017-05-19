@@ -69,6 +69,9 @@ def integration_test(ctx):
   get = "https://k2aks8qbq5.execute-api.us-west-2.amazonaws.com/prod/pizza"
   r = requests.get(get)
 
+  if r.status_code != 200:
+    print "***** INTEGRATION TEST FAILURE: Did not get HTTP 200, instead got {0}.".format(r.status_code)
+
   if "Access-Control-Allow-Origin" not in r.headers:
     print "***** INTEGRATION TEST FAILURE: Access-Control-Allow-Origin Missing for {0}".format(get)
   else:
