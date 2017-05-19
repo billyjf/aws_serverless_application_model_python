@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -xev
 source deploy_utils.sh
 
 aws_creds_are_set ~/.aws/credentials
