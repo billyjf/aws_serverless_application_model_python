@@ -11,7 +11,7 @@ function clean_python_lambda() {
 }
 
 function zip_push_to_s3_and_generate_deployment_cloudformation() {
-    sed -i "s_CodeUri: .*_CodeUri: $(pwd)/cloudformation/lambda.yaml_g" cloudformation/lambda.yaml
+    sed -i "s|CodeUri: .*|CodeUri: $(pwd)/cloudformation/lambda.yaml|g" cloudformation/lambda.yaml
     aws cloudformation package --template cloudformation/lambda.yaml --s3-bucket billyjf.carbcounter | tail -n +2 | tee cloudformation/lambda_deploy.yaml
 }
 
