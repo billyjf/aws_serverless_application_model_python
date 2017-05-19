@@ -27,8 +27,8 @@ def lambda_handler(event, context):
         search = event['pathParameters']['search']
 
     if len(search) > 0:
-        nix = Nutritionix(app_id="***REMOVED***",
-                          api_key="***REMOVED***")
+        nix = Nutritionix(app_id=os.environ["app_id"],
+                          api_key=os.environ["api_key"])
 
         nix_results = nix.search().nxql(
             fields=["item_id",

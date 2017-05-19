@@ -41,3 +41,7 @@ Resources:
           - logs:PutLogEvents
           Resource:
           - arn:aws:logs:us-west-2:649309545751:log-group:/aws/lambda/carbcounter:*
+      Environment:
+        Variables:
+          api_key: ""
+          app_id: ""
