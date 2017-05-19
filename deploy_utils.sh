@@ -11,7 +11,7 @@ function clean_python_lambda() {
 }
 
 function zip_push_to_s3_and_generate_deployment_cloudformation() {
-    aws cloudformation package --template cloudformation_lambda.yaml --s3-bucket billyjf.carbcounter | grep AWSTemplateFormatVersion -A -1 | tee cloudformation_lambda_deploy.yaml
+    aws cloudformation package --template cloudformation/lambda.yaml --s3-bucket billyjf.carbcounter | grep AWSTemplateFormatVersion -A -1 | tee cloudformation/lambda_deploy.yaml
 }
 
 function integration_test() {

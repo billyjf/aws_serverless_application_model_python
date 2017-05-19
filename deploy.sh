@@ -10,7 +10,7 @@ download_dependencies carbcounter
 clean_python_lambda
 
 zip_push_to_s3_and_generate_deployment_cloudformation
-aws cloudformation deploy --template cloudformation_lambda_deploy.yaml --stack-name lambda-carbcounter --capabilities CAPABILITY_IAM
+aws cloudformation deploy --template cloudformation/lambda_deploy.yaml --stack-name lambda-carbcounter --capabilities CAPABILITY_IAM
 integration_test
 
 echo "******** DON'T FORGET MANUAL STEPS:"

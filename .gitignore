@@ -3,4 +3,4 @@
 .DS_Store
 lambda/carbcounter/nutritionix*
 lambda/carbcounter/requests**
-cloudformation_lambda_deploy.yaml
+cloudformation/lambda_deploy.yaml
