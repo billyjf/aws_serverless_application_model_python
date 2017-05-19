@@ -6,8 +6,7 @@ python:
   - "pypy3" # Pypy3 2.4.0
   - "pypy-5.3.1"
 # command to install dependencies
-#install:
-#  - 
+install: echo "skip"
 # command to run tests
 #script: pytest
 
