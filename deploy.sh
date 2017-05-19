@@ -1,6 +1,8 @@
 #!/bin/bash -e
 source deploy_utils.sh
 
+aws_creds_are_set ~/.aws/credentials
+
 aws s3 cp favicon.ico s3://cc.billyjf.com --acl public-read
 aws s3 cp favicon.png s3://cc.billyjf.com --acl public-read
 aws s3 cp index.html s3://cc.billyjf.com --acl public-read

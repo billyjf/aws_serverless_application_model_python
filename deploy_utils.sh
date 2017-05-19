@@ -26,3 +26,18 @@ function integration_test() {
         echo "***** INTEGRATION TEST FAILURE: Access-Control-Allow-Origin Missing!"
     fi
 }
+
+function aws_creds_are_set() {
+    if [ $(cat $1 | grep aws_ &>/dev/null; echo $?) -gt 0 ]
+    then
+        echo "Aws creds not set, setting them now."
+
+cat > $1 < EOF
+[default]
+region=us-west-2
+aws_access_key_id=$aws_access_key_id
+aws_secret_access_key=$aws_secret_access_key
+EOF
+
+    fi
+}
