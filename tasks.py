@@ -34,6 +34,8 @@ def download_dependencies(ctx,
   if not os.path.isfile("lambda/{0}/nutritionix.py".format(lambda_name)):
     ctx.run("pip install -t {0} nutritionix".format(lambda_name))
 
+  ctx.run("ls -R lambda/{0}".format(lambda_name))
+
 @task
 def clean_python_lambda(ctx):
   ctx.run("rm -rf lambda/carbcounter/*.pyc")
