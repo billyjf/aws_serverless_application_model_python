@@ -28,11 +28,11 @@ function integration_test() {
 }
 
 function aws_creds_are_set() {
-    if [ $(cat $1 | grep aws_ &>/dev/null; echo $?) -gt 0 ]
+    if [ ! -f $1 ]
     then
         echo "Aws creds not set, setting them now."
 
-cat > $1 < EOF
+cat | tee $1 < EOF
 [default]
 region=us-west-2
 aws_access_key_id=$aws_access_key_id
