@@ -36,6 +36,8 @@ def download_dependencies(ctx,
 
   ctx.run("ls -R lambda/{0}".format(lambda_name))
 
+  ctx.run("ls -R .")
+
 @task
 def clean_python_lambda(ctx):
   ctx.run("rm -rf lambda/carbcounter/*.pyc")
