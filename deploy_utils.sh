@@ -31,8 +31,9 @@ function aws_creds_are_set() {
     if [ ! -f $1 ]
     then
         echo "Aws creds not set, setting them now."
+        mkdir -p ~/.aws
 
-cat | tee -a $1 << EOF
+cat | tee $1 << EOF
 [default]
 region=us-west-2
 aws_access_key_id=$aws_access_key_id
