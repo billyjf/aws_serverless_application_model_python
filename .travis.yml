@@ -18,6 +18,7 @@ addons:
       - libcurl4-openssl-dev
 
 after_success: |
-  pip install --upgrade --user awscli
+  set -e
+  pip install --upgrade awscli
   aws --version
   ./deploy.sh
