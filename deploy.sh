@@ -2,10 +2,10 @@
 pip install invoke # task runner
 pip install requests # http for humans
 
+invoke clean_python_lambda # for consecutive runs
 invoke aws_creds_are_set ~
 invoke s3_site_publish
 invoke download_dependencies carbcounter
-invoke clean_python_lambda
 invoke zip_push_to_s3_and_generate_deployment_cloudformation
 invoke cloudformation_deploy
 invoke integration_test
