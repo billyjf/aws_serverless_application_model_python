@@ -46,9 +46,17 @@ def zip_push_to_s3_and_generate_deployment_cloudformation(ctx):
     lambda_template = file.read()
 
   with open("cloudformation/lambda.yaml", "w") as out:
-    out.write(re.sub(r"CodeUri:.*", 
-                     "CodeUri: {0}/lambda".format(this_script_dir), 
-                     lambda_template))
+    lambda_template = re.sub(r"CodeUri:.*", 
+                             "CodeUri: {0}/lambda".format(this_script_dir), 
+                             lambda_template)
+    lambda_template = re.sub(r"app_id:.*", 
+                             'app_id: "{0}"'.format(os.environ['app_id']), 
+                             lambda_template)
+    lambda_template = re.sub(r"api_key:.*", 
+                             'api_key: "{0}"'.format(os.environ['api_key']), 
+                             lambda_template)
+
+    out.write(lambda_template)
 
   ctx.run("aws cloudformation package --template cloudformation/lambda.yaml --s3-bucket billyjf.carbcounter | tail -n +2 | tee cloudformation/lambda_deploy.yaml")
 
