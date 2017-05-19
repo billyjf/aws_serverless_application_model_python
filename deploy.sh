@@ -13,5 +13,5 @@ invoke integration_test
 echo "******** DON'T FORGET MANUAL STEPS (on first deployment/iteration, not necessary for all future deployments):"
 echo " 1. aws lambda add-permission --function-name [arn] --source-arn 'arn:aws:execute-api:us-west-2:649309545751:cruu7iixa4/*/*/carbcounter/*' --principal apigateway.amazonaws.com --statement-id efcea982-331a-4b0e-80d9-3edf5a5d3964 --action lambda:InvokeFunction"
 echo " 2? Actions > Enable CORS > accept defaults given to you via cloudformation prior deploy (strange)."
-echo " 4. Update client index.html and deploy static for new api gateway key --> factor this out in the future."
+echo " 4. Update client index.html (dataFeed) and deploy static for new api gateway key --> factor this out in the future."
 echo " 5. Final ui client test."
