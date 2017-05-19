@@ -4,6 +4,8 @@
 Example project deployed end to end on aws, demonstrating the full power of aws' [serverless application model (SAM)](https://github.com/awslabs/serverless-application-model), deployable with a single command:
 `deploy.sh`.
 
+See deployed app at <http://cc.billyjf.com/>.
+
 ## References
 
 ### Bfg
