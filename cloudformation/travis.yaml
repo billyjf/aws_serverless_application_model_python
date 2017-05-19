@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: "Travis ci resources."
+Resources:
+  IAMUserTravisDeploy:
+    Type: "AWS::IAM::User"
+    Properties:
+      UserName: travis_carbcounter
+      Policies:
+      - PolicyName: SAM
+        PolicyDocument:
+          Version: '2012-10-17'
+          Statement:
+          - Effect: Allow
+            Action:
+            - cloudformation:Create*
+            - cloudformation:Update*
+            - cloudformation:Execute*
+            - cloudformation:Describe*
+            Resource:
+            - 'arn:aws:cloudformation:us-west-2:*:stack/*carbcounter*/*'
+            - 'arn:aws:cloudformation:us-west-2:aws:transform/Serverless-2016-10-31'
+          - Effect: Allow
+            Action:
+            - s3:Get*
+            - s3:Put*
+            Resource:
+            - '*'
+  IAMUserTravisDeployAccessKey:
+    Type: "AWS::IAM::AccessKey"
+    Properties:
+      UserName: !Ref IAMUserTravisDeploy
+Outputs:
+  TravisAccessKey:
+    Value: !Ref IAMUserTravisDeployAccessKey
+  TravisSecretAccessKey:
+    Value: !GetAtt IAMUserTravisDeployAccessKey.SecretAccessKey
