@@ -67,19 +67,12 @@ def zip_push_to_s3_and_generate_deployment_cloudformation(ctx):
 def cloudformation_deploy(ctx):
   ctx.run("aws cloudformation deploy --template cloudformation/lambda_deploy.yaml --stack-name lambda-carbcounter --capabilities CAPABILITY_IAM")
 
-def test_failed(msg):
-  print "***** INTEGRATION TEST FAILURE: {0}".format(msg)
-  sys.exit(1)
-
 @task
 def integration_test(ctx):
   get = "https://k2aks8qbq5.execute-api.us-west-2.amazonaws.com/prod/pizza"
   r = requests.get(get)
 
-  if r.status_code != 200:
-    test_failed("Did not get HTTP 200, instead got {0}.".format(r.status_code))
+  assert r.status_code == 200, "Did not get HTTP 200, instead got {0}.".format(r.status_code)
+  assert "Access-Control-Allow-Origin" in r.headers, "Access-Control-Allow-Origin Missing for {0}".format(get)
 
-  if "Access-Control-Allow-Origin" not in r.headers:
-    test_failed("Access-Control-Allow-Origin Missing for {0}".format(get))
-  else:
-    print "***** INTEGRATION TEST SUCCESSFUL"
+  print "***** INTEGRATION TEST SUCCESSFUL"
